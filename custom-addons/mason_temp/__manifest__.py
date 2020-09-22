@@ -9,8 +9,8 @@
         "mason_mrp_workorder",
     ],
     "data": [
-        "mason_temp/views/mrp_workcenter_views.xml",
-        "mason_temp/views/mrp_workorder_views.xml",
+        "views/mrp_workcenter_views.xml",
+        "views/mrp_workorder_views.xml",
     ],
     "application": False,
     "license": "AGPL-3",
