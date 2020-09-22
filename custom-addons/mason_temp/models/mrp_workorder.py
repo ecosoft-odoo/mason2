@@ -34,6 +34,10 @@ class MrpWorkorderCost(models.Model):
     workorder_id = fields.Many2one(
         comodel_name="mrp.workorder",
     )
+    workcenter_id = fields.Many2one(
+        comodel_name="mrp.workcenter",
+        related="workorder_id.workcenter_id"
+    )
 
     @api.onchange("position_id")
     def _onchange_position_id(self):
