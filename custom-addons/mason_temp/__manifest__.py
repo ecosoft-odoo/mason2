@@ -9,6 +9,7 @@
         "mason_mrp_workorder",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "views/mrp_workcenter_views.xml",
         "views/mrp_workorder_views.xml",
     ],
