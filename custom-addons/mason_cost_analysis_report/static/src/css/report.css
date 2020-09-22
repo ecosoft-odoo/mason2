@@ -1,0 +1,61 @@
+.button_row {
+    padding-bottom: 10px;
+}
+.custom_footer {
+    font-size: 7px !important;
+}
+.mason_cost_analysis_report_page {
+    padding-top: 10px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: Helvetica, Arial;
+}
+.act_as_table {
+    display: table !important;
+    background-color: white;
+}
+.data_table {
+    width: 100% !important;
+}
+.data_table,
+.act_as_row {
+    border-left: 0px;
+    border-right: 0px;
+    text-align: center;
+    font-size: 10px;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-collapse: collapse;
+}
+.data_table .act_as_cell {
+    border: 1px solid lightGrey;
+    text-align: center;
+    word-wrap: break-word;
+}
+.data_table .act_as_row.labels {
+    font-weight: bold;
+}
+.act_as_row {
+    display: table-row !important;
+    page-break-inside: avoid;
+}
+.act_as_row.labels {
+    background-color: #f0f0f0 !important;
+}
+.act_as_cell {
+    display: table-cell !important;
+    page-break-inside: avoid;
+}
+.act_as_thead {
+    display: table-header-group !important;
+}
+.act_as_cell.amount {
+    word-wrap: normal;
+    text-align: right;
+}
+.act_as_cell.left {
+    text-align: left;
+}

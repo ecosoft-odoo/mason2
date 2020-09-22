@@ -1,0 +1,37 @@
+<odoo>
+    <record id="update_qty_approved_view_form" model="ir.ui.view">
+        <field name="name">update.qty.approved.view.form</field>
+        <field name="model">update.qty.approved</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="qty_approved" string="New Approved Quantity"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Updated Work Orders">
+                        <field name="workorder_ids" readonly="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="qty_approved" string="Old Approved Quantity"/>
+                                <field name="state" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button string="Confirm" name="update_qty_approved" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window
+        name="Update Approved Quantity"
+        id="act_update_qty_approved"
+        res_model="update.qty.approved"
+        view_mode="form"
+        target="new"/>
+</odoo>

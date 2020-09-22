@@ -1,0 +1,18 @@
+server-ux:
+    - date_range
+l10n-thailand:
+    - l10n_th_partner
+    - l10n_th_tax_invoice
+    - l10n_th_tax_report
+    - l10n_th_withholding_tax_cert
+    - l10n_th_withholding_tax_cert_form
+    - l10n_th_withholding_tax_report
+partner-contact:
+    - partner_company_type
+    - partner_firstname
+purchase-workflow:
+    - purchase_deposit
+reporting-engine:
+    - report_csv
+    - report_xlsx
+    - report_xlsx_helper

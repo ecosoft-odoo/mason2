@@ -1,0 +1,142 @@
+<odoo>
+    <template id="assets_backend" name="mason_cost_analysis_report assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/mason_cost_analysis_report/static/src/css/report.css" rel="stylesheet"/>
+            <script type="text/javascript" src="/mason_cost_analysis_report/static/src/js/mason_cost_analysis_report_backend.js"/>
+        </xpath>
+    </template>
+    <template id="report_buttons">
+        <div class="button_row">
+            <button class="o_mason_cost_analysis_report_print btn btn-sm oe_button"><span class="fa fa-print"/>Print</button>
+            <button class="o_mason_cost_analysis_report_export btn btn-sm oe_button"><span class="fa fa-download"/>Export</button>
+        </div>
+    </template>
+    <template id="internal_layout">
+        <div class="article">
+            <link href="/mason_cost_analysis_report/static/src/css/report.css" rel="stylesheet"/>
+            <t t-raw="0"/>
+        </div>
+        <div class="footer">
+            <div class="row">
+                <div class="col-6 custom_footer">
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                </div>
+                <div class="col-6 text-right custom_footer">
+                    <span class="page"/>/<span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="cost_analysis_report_base">
+        <div class="page">
+            <!-- title -->
+            <div class="row">
+                <h4 class="mt0" style="text-align: center;">Cost Analysis Report</h4>
+            </div>
+            <!-- filter data -->
+            <div class="act_as_table data_table" style="width: 100%;">
+                <div class="act_as_row labels">
+                    <div class="act_as_cell">Labor Type</div>
+                </div>
+                <div class="act_as_row">
+                    <div class="act_as_cell" style="height: 14px;">
+                        <span t-field="o.labor_type"/>
+                    </div>
+                </div>
+            </div>
+            <!-- cost analysis report table -->
+            <div class="act_as_table data_table mt8" style="width: 100%;">
+                <div class="act_as_thead">
+                    <div class="act_as_row labels">
+                        <div class="act_as_cell">MO</div>
+                        <div class="act_as_cell">WO</div>
+                        <div class="act_as_cell">Source (MO)</div>
+                        <div class="act_as_cell">Labor Type</div>
+                        <div class="act_as_cell">Production Quantity</div>
+                        <div class="act_as_cell">Budget/Unit</div>
+                        <div class="act_as_cell">Total Budget</div>
+                        <div class="act_as_cell">Quantity Produced</div>
+                        <div class="act_as_cell">Hour Spent</div>
+                        <div class="act_as_cell">Statistic (Q/Hr)</div>
+                        <div class="act_as_cell">Labor cost/day</div>
+                        <div class="act_as_cell">Multiplier</div>
+                        <div class="act_as_cell">Cost/Unit</div>
+                        <div class="act_as_cell">Total Payment</div>
+                    </div>
+                </div>
+                <div class="act_as_row lines" t-foreach="o.results" t-as="line">
+                    <t t-set="total_budget" t-value="line.product_qty * line.budget_unit"/>
+                    <t t-set="hour_spent" t-value="line.get_hour_spent(line.duration)"/>
+                    <t t-set="statistic" t-value="hour_spent and line.qty_produced / hour_spent or 0"/>
+                    <t t-set="cost_unit" t-value="0"/>
+                    <t t-if="statistic">
+                        <t t-if="line.labor_type in ['labor_cost_piece', 'labor_cost_day_ot']">
+                            <t t-set="cost_unit" t-value="(line.labor_cost_day / 8 * line.multiplier) / statistic"/>
+                        </t>
+                        <t t-if="line.labor_type == 'labor_cost_day'">
+                            <t t-set="cost_unit" t-value="(line.labor_cost_day * line.multiplier) / statistic"/>
+                        </t>
+                    </t>
+                    <t t-set="total_payment" t-value="cost_unit * line.qty_produced"/>
+                    <div class="act_as_cell left">
+                        <span t-field="line.mo_name"/>
+                    </div>
+                    <div class="act_as_cell left">
+                        <span t-field="line.wo_name"/>
+                    </div>
+                    <div class="act_as_cell left">
+                        <span t-field="line.origin"/>
+                    </div>
+                    <div class="act_as_cell left">
+                        <span t-field="line.labor_type"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(line.product_qty)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(line.budget_unit)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(total_budget)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(line.qty_produced)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(hour_spent)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(statistic)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(line.labor_cost_day)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(line.multiplier)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(cost_unit)"/>
+                    </div>
+                    <div class="act_as_cell amount">
+                        <span t-esc="'{0:,.2f}'.format(total_payment)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="cost_analysis_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="mason_cost_analysis_report.internal_layout">
+                    <t t-call="mason_cost_analysis_report.cost_analysis_report_base"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="cost_analysis_report_html">
+        <div class="mason_cost_analysis_report_page">
+            <t t-call="mason_cost_analysis_report.report_buttons"/>
+            <t t-call="mason_cost_analysis_report.cost_analysis_report_base"/>
+        </div>
+    </template>
+</odoo>

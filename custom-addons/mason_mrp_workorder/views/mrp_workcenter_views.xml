@@ -1,0 +1,15 @@
+<odoo>
+    <record id="mrp_workcenter_view" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+            <group name="costing" position="inside">
+                <field name="labor_cost_day"/>
+                <field name="multiplier1"/>
+                <field name="multiplier2"/>
+                <field name="multiplier3"/>
+            </group>
+        </field>
+    </record>
+</odoo>

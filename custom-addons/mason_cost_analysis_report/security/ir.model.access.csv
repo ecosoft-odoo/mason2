@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cost_analysis_report_view,cost.analysis.report.view,model_cost_analysis_report_view,,1,0,0,0

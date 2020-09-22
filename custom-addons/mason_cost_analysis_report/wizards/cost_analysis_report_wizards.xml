@@ -1,0 +1,52 @@
+<odoo>
+    <record id="cost_analysis_report_wizards_view_form" model="ir.ui.view">
+        <field name="name">cost.analysis.report.wizards.view.form</field>
+        <field name="model">cost.analysis.report.wizards</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="criteria">
+                    <group>
+                        <field name="labor_type"/>
+                    </group>
+                    <group></group>
+                </group>
+                <footer>
+                    <button
+                        name="button_export_html"
+                        string="View"
+                        type="object"
+                        default_focus="1"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button
+                        name="button_export_pdf"
+                        string="Export PDF"
+                        type="object"
+                    />
+                    or
+                    <button
+                        name="button_export_xlsx"
+                        string="Export XLSX"
+                        type="object"
+                    />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window
+        name="Cost Analysis Report"
+        id="cost_analysis_report_wizards_action"
+        res_model="cost.analysis.report.wizards"
+        view_mode="form"
+        target="new"/>
+
+    <menuitem
+        id="cost_analysis_report_wizards_menu"
+        parent="mrp.menu_mrp_reporting"
+        action="cost_analysis_report_wizards_action"
+        sequence="20"/>
+</odoo>
