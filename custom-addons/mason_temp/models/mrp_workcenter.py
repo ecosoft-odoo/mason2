@@ -21,5 +21,5 @@ class MrpWorkcenterPosition(models.Model):
     name = fields.Char()
     labor_cost_day = fields.Float(string="Labor Cost/Day")
     workcenter_id = fields.Many2one(
-        comodel_name="mrp.workorder",
+        comodel_name="mrp.workcenter",
     )

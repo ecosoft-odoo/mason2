@@ -10,11 +10,12 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Labor Cost">
                     <field name="cost_ids">
-                        <tree>
-                            <field name="position_id" domain="[('workcenter_id', '=', parent_id.workcenter_id)]"/>
+                        <tree editable="bottom">
+                            <field name="position_id" domain="[('workcenter_id', '=', workorder_id.workcenter_id)]"/>
                             <field name="man_number"/>
                             <field name="labor_cost_day" readonly="True"/>
                             <field name="total_labor_cost_day" readonly="True" sum="Total"/>
+                            <field name="workorder_id" invisible="1"/>
                         </tree>
                     </field>
                 </page>

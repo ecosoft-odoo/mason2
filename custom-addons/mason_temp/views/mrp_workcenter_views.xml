@@ -6,8 +6,8 @@
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page string="Position">
-                    <field name="position_ids" editable="bottom">
-                        <tree>
+                    <field name="position_ids">
+                        <tree editable="bottom">
                             <field name="name"/>
                             <field name="labor_cost_day"/>
                         </tree>
