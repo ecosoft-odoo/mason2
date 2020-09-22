@@ -1,0 +1,22 @@
+<odoo>
+    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.work.order.form</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_produced']" position="after">
+                <field name="forcast_qty"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Labor Cost">
+                    <field name="cost_ids">
+                        <field name="position_id" domain="[('workcenter_id', '=', parent_id.workcenter_id)]"/>
+                        <field name="man_number"/>
+                        <field name="labor_cost_day" readonly="True"/>
+                        <field name="total_labor_cost_day" readonly="True" sum="Total"/>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

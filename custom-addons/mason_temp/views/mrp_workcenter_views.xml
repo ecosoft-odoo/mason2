@@ -1,0 +1,17 @@
+<odoo>
+    <record id="mrp_workcenter_view" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]/group/group[3]" position="after">
+                <group string="Position" name="position">
+                    <field name="position_ids" editable="bottom">
+                        <field name="name"/>
+                        <field name="labor_cost_day"/>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
