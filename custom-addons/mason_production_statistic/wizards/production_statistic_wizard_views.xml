@@ -1,0 +1,37 @@
+<odoo>
+    <record id="production_statistic_wizard_view_form" model="ir.ui.view">
+        <field name="name">production.statistic.wizard.view.form</field>
+        <field name="model">production.statistic.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="criteria">
+                    <group>
+                        <field name="product_id" required="1" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        <field name="workcenter_id" attrs="{'invisible': [('product_id', '=', False)], 'required': [('product_id', '!=', False)]}" domain="[('order_ids.product_id', '=', product_id)]" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                    </group>
+                    <group></group>
+                </group>
+                <footer>
+                    <button name="open_production_statistic" string="Confirm" type="object" default_focus="1" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="production_statistic_wizard_action" model="ir.actions.act_window">
+        <field name="name">Production Statistic</field>
+        <field name="res_model">production.statistic.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="production_statistic_wizard_menu"
+        name="Production Statistic"
+        parent="mrp.menu_mrp_bom"
+        action="production_statistic_wizard_action"
+        sequence="100"
+        groups="mrp.group_mrp_manager"/>
+</odoo>

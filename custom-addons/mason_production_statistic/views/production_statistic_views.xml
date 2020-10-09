@@ -1,0 +1,36 @@
+<odoo>
+    <record id="production_statistic_view_tree" model="ir.ui.view">
+        <field name="name">production.statistic.view.tree</field>
+        <field name="model">production.statistic</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" decoration-danger="type == 'adjustment' and not confirm">
+                <field name="product_id" readonly="1" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                <field name="origin" readonly="1"/>
+                <field name="production_id" readonly="1" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                <field name="workcenter_id" readonly="1" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                <field name="qty_per_day" attrs="{'readonly': ['|', ('type', '=', 'system'), ('confirm', '=', True)]}"/>
+                <field name="multiplier" readonly="1"/>
+                <field name="labor_cost_piece" attrs="{'readonly': ['|', ('type', '=', 'system'), ('confirm', '=', True)]}"/>
+                <field name="default" readonly="1"/>
+                <button name="%(confirm_default_wizard_action)d" string="Confirm" type="action" icon="fa-check-circle" attrs="{'invisible': ['|', ('type', '!=', 'adjustment'), ('confirm', '=', True)]}"/>
+                <field name="type" readonly="1"/>
+                <field name="approved_id" readonly="1" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                <field name="note" attrs="{'readonly': ['|', ('type', '=', 'system'), ('confirm', '=', True)]}"/>
+                <field name="confirm" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="production_statistic_view_search" model="ir.ui.view">
+        <field name="name">production.statistic.view.search</field>
+        <field name="model">production.statistic</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="origin"/>
+                <field name="production_id"/>
+                <separator/>
+                <filter string="Default" name="default" domain="[('default', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

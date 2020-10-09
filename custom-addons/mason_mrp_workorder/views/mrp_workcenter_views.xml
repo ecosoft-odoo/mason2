@@ -5,10 +5,12 @@
         <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook/page/group/group[3]" position="after">
-                <field name="multiplier_piece"/>
+                <group>
+                    <field name="multiplier_piece" required="1" groups="mrp.group_mrp_manager"/>
+                </group>
             </xpath>
             <xpath expr="//notebook" position="inside">
-                <page string="Positions">
+                <page string="Positions" groups="mrp.group_mrp_manager">
                     <field name="position_ids">
                         <tree editable="bottom">
                             <field name="name"/>
