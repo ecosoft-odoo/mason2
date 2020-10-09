@@ -2,19 +2,20 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 {
-    "name": "Mason :: MRP II",
+    "name": "Mason :: MRP II (Temp)",
     "version": "13.0.1.0.0",
     "category": "Manufacturing/Manufacturing",
     "description": """
-        Mason extension for MRP which inherited from mrp module.
+        Mason extension for MRP which inherited from mrp_workorder.
     """,
     "depends": [
-        "mrp",
+        "mrp_workorder",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "views/mrp_workcenter_views.xml",
+        "wizards/update_qty_approved_wizards.xml",
         "views/mrp_workorder_views.xml",
+        "views/mrp_workcenter_views.xml",
     ],
     "application": False,
     "license": "AGPL-3",

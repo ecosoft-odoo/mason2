@@ -4,12 +4,19 @@
         <field name="model">mrp.workcenter</field>
         <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
         <field name="arch" type="xml">
-            <group name="costing" position="inside">
-                <field name="labor_cost_day"/>
-                <field name="multiplier1"/>
-                <field name="multiplier2"/>
-                <field name="multiplier3"/>
-            </group>
+            <xpath expr="//notebook/page/group/group[3]" position="after">
+                <field name="multiplier_piece"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Positions">
+                    <field name="position_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="labor_cost_day"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
         </field>
     </record>
 </odoo>

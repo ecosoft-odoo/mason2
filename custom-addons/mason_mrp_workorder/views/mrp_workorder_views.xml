@@ -1,49 +1,18 @@
 <odoo>
-    <record id="mrp_workorder_view_form_tablet" model="ir.ui.view">
-        <field name="name">mrp.workorder.view.form.inherit.quality.tablet.new</field>
-        <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp_workorder.mrp_workorder_view_form_tablet"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@class='workorder_bar']/div[@class='workorder_bar_left o_workorder_bar_content']" position="inside">
-                <span style="margin-left: 5px;">Men Quantity</span>
-                <label for="qty_men" string=":"/>
-                <field name="qty_men" class="oe_inline" required="1"/>
-            </xpath>
-        </field>
-    </record>
-
     <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
         <field name="name">mrp.production.work.order.form</field>
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='is_produced']" position="after">
-                <label for="qty_approved"/>
-                <div class="o_row no-gutters d-flex">
-                    <div class="col">
-                        <field name="qty_approved" class="mr-1" readonly="1"/>
-                        <button type="action" name="%(act_update_qty_approved)d" string="Update" class="oe_link" attrs="{'invisible': [('state', 'in', ['pending', 'cancel'])]}"/>
-                    </div>
-                </div>
-                <field name="labor_type"/>
-                <field name="budget_unit"/>
-            </xpath>
-            <xpath expr="//field[@name='time_ids']/tree/field[@name='duration']" position="after">
-                <field name="qty_done" sum="Total Done Quantity"/>
-            </xpath>
-            <xpath expr="//field[@name='time_ids']/form/group" position="after">
-                <notebook>
-                    <page string="Production Tracking">
-                        <field name="line_ids">
-                            <tree>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
-                                <field name="qty_done"/>
-                                <field name="qty_men"/>
-                            </tree>
-                        </field>
-                    </page>
-                </notebook>
+            <xpath expr="//notebook" position="inside">
+                <page string="Man">
+                    <field name="man_ids">
+                        <tree editable="bottom">
+                            <field name="position_id" domain="[('workcenter_id', '=', parent.workcenter_id)]" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                            <field name="qty_man"/>
+                        </tree>
+                    </field>
+                </page>
             </xpath>
         </field>
     </record>

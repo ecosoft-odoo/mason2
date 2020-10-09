@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mrp_workcenter_productivity_line,mrp_workcenter_productivity_line,model_mrp_workcenter_productivity_line,,1,1,1,1
+access_mrp_workcenter_position_user,mrp.workcenter.position.user,model_mrp_workcenter_position,mrp.group_mrp_user,1,0,0,0
+access_mrp_workcenter_position_manager,mrp.workcenter.position.manager,model_mrp_workcenter_position,mrp.group_mrp_manager,1,1,1,1
+access_mrp_workorder_man_user,mrp.workorder.man.user,model_mrp_workorder_man,mrp.group_mrp_user,1,1,1,1
