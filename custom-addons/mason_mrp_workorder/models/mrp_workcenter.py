@@ -21,9 +21,9 @@ class MrpWorkcenter(models.Model):
     @api.constrains("multiplier_piece")
     def _check_multiplier(self):
         for rec in self:
-            if not rec.multiplier_piece:
+            if rec.multiplier_piece < 1:
                 raise UserError(
-                    _("Multiplier / Piece must be greater than zero."))
+                    _("Multiplier / Piece must be greater than 1.00."))
 
     @api.constrains("position_ids")
     def _check_position_ids(self):
